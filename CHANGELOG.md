@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+-   Updated the driver to NCS 2.6.0.
+
 ## [3.4.0] - 2023-09-01
 
 ### Added

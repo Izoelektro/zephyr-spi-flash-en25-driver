@@ -167,8 +167,8 @@ static int ext_mutex_clk_check(const struct device *dev)
 	}
 
 	/* Read clock a bunch of times and check if it is high at any point */
-	int interations = CONFIG_SPI_FLASH_EN25_EXTERNAL_MUTEX_TIMEOUT / 20;
-	for (int i = 0; i < interations; i++) {
+	int iterations = CONFIG_SPI_FLASH_EN25_EXTERNAL_MUTEX_TIMEOUT / 20;
+	for (int i = 0; i < iterations; i++) {
 		/* clk_pin_check takes cca 10 ms */
 		err = clk_pin_check(dev_config->spi_clk);
 		if (err == 0) {
@@ -236,8 +236,8 @@ static int acquire_ext_mutex(const struct device *dev)
 	}
 
 	/* Configure CS pin to output */
-	if (dev_config->bus.config.cs->gpio.port) {
-		gpio_pin_configure_dt(&dev_config->bus.config.cs->gpio, GPIO_OUTPUT);
+	if (dev_config->bus.config.cs.gpio.port) {
+		gpio_pin_configure_dt(&dev_config->bus.config.cs.gpio, GPIO_OUTPUT);
 	}
 
 	/* Wake SPI peripheral */
@@ -265,8 +265,8 @@ static int release_ext_mutex(const struct device *dev)
 	}
 
 	/* Configure CS pin to disconnected */
-	if (dev_config->bus.config.cs->gpio.port) {
-		gpio_pin_configure_dt(&dev_config->bus.config.cs->gpio, GPIO_INPUT | GPIO_PULL_UP);
+	if (dev_config->bus.config.cs.gpio.port) {
+		gpio_pin_configure_dt(&dev_config->bus.config.cs.gpio, GPIO_INPUT | GPIO_PULL_UP);
 	}
 
 	/* Configure signal pin to input */
