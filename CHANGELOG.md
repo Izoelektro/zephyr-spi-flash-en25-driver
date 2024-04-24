@@ -12,6 +12,10 @@ and this project adheres to
 
 -   Updated the driver to NCS 2.6.0.
 
+### Fixed
+
+-   Compile time warning for unused `check_jedec_id` when `CONFIG_SPI_FLASH_EN25_JEDEC_CHECK_AT_INIT=n`.
+
 ## [3.4.0] - 2023-09-01
 
 ### Added

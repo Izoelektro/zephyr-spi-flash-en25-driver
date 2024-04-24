@@ -813,16 +813,16 @@ static int spi_flash_en25_init(const struct device *dev)
 	send_cmd_op(dev, CMD_EXIT_DPD, dev_config->t_exit_dpd);
 
 	/* Check jedec ID */
-#ifdef CONFIG_SPI_FLASH_EN25_JEDEC_CHECK_AT_INIT
-	err = check_jedec_id(dev);
-	if (err != 0) {
-		release(dev);
-		release_ext_mutex(dev);
-		return err;
+	if (IS_ENABLED(CONFIG_SPI_FLASH_EN25_JEDEC_CHECK_AT_INIT)) {
+		err = check_jedec_id(dev);
+		if (err != 0) {
+			release(dev);
+			release_ext_mutex(dev);
+			return err;
+		}
+	} else {
+		LOG_INF("SPI_FLASH_EN25_JEDEC_CHECK_AT_INIT is not set, skipping JEDEC ID check.");
 	}
-#else
-	LOG_INF("SPI_FLASH_EN25_JEDEC_CHECK_AT_INIT is not set, skipping JEDEC ID check.");
-#endif
 
 	/* Place holder for function call, we might need it in future. */
 	// err = disable_block_protect(dev);
