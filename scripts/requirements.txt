@@ -1,2 +1,3 @@
-east-tool
+east-tool>=0.16.1
 west
+junit2html
